@@ -63,18 +63,22 @@ for (table_name in names(tables_list)) {
 
 # -------------------------4. Export transformed data --------------------------
 # View(table_OnlineSales)
+# Save as csv files
 for (table_name in names(tables_list)) {
   table <- tables_list[[table_name]]
   write.table(table,
-              file= paste("D:/Coding Projects/Customer Lifetime Value Analysis/transformed datasets/", table_name, "_cleaned.csv"),
+              file= paste0("D:/Coding Projects/Customer Lifetime Value Analysis/transformed datasets/", table_name, "_cleaned.csv"),
+              # paste0(): no default separator
               sep = "|",
               row.names = FALSE,
               col.names = TRUE
               )
-  print(paste("Dataset saved: ", table_name))
+  print(paste("Dataset (csv) saved: ", table_name))
 }
 
+# Save as RData
+save(table_Customer, table_Discount, table_GST, table_MarketingSpend, table_OnlineSales,
+     file = "D:/Coding Projects/Customer Lifetime Value Analysis/transformed datasets/tables_cleaned.RData")
 
-
-
+print("Dataset (RData) saved.")
 
