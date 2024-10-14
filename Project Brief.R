@@ -2,8 +2,8 @@
 # The project requirement website: https://www.kaggle.com/datasets/rishikumarrajvansh/marketing-insights-for-e-commerce-company
 
 # --------------------------------Business Objective----------------------------
-# 1.Calculate Invoice amount or sale_amount or revenue for each transaction and item level (X)
-# Invoice Value =(( QuantityAvg_price)(1 - Dicount_pct)*(1+GST))+Delivery_Charges
+# 1.Calculate Invoice amount or sale_amount or revenue for each transaction and item level 
+# 1.1 Invoice Value =((Quantity * Avg_price)(1 - Discount_pct)*(1+GST))+Delivery_Charges (X)
 
 # 2.Perform Detailed exploratory analysis 
 # 2.1 Understanding how many customers acquired every month

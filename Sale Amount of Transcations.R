@@ -51,14 +51,20 @@ View_OnlineSales_GST_Coupon$Invoice <- (
 View_OnlineSales_GST_Coupon$Invoice <- round(View_OnlineSales_GST_Coupon$Invoice, 2)
 
 View_OnlineSales_Invoice_Transaction <- View_OnlineSales_GST_Coupon[, c("Transaction_ID", "Invoice")]
+View_OnlineSales_Invoice_Transaction <- View_OnlineSales_Invoice_Transaction[order(View_OnlineSales_Invoice_Transaction$Invoice, 
+                                                                                   decreasing = TRUE), ]
 View(View_OnlineSales_Invoice_Transaction)
 
 # 5. Summarize Invoice value on item (SKU) level
 # sum() and group-by:
-View_OnlineSales_Invoice_SKU <- aggregate(Invoice ~ Product_SKU, 
+# View(View_OnlineSales_GST_Coupon)
+View_OnlineSales_Invoice_SKU <- View_OnlineSales_GST_Coupon[, c("Product_SKU", "Product_Description", "Invoice")]
+View_OnlineSales_Invoice_SKU <- aggregate(Invoice ~ Product_SKU + Product_Description, 
                                           data = View_OnlineSales_GST_Coupon,
                                           FUN = sum
                                           )
+# order() to sort in descending order
+View_OnlineSales_Invoice_SKU <- View_OnlineSales_Invoice_SKU[order(View_OnlineSales_Invoice_SKU$Invoice, decreasing = TRUE), ]
 View(View_OnlineSales_Invoice_SKU)
 
-
+print("Invoice Calculation completed.")
