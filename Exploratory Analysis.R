@@ -1,7 +1,8 @@
 # 2.Perform Detailed exploratory analysis:
 # 2.1 Understanding how many customers acquired every month (x)
-# 2.2 Understand the retention of customers on month on month basis 
-# 2.3 How the revenues from existing/new customers on month on month basis
+# 2.2 Understand the retention of customers on month on month basis (x)
+
+# 2.3 How the revenues from existing/new customers on month on month basis (X)
 # 2.4 How the discounts playing role in the revenues?
 # 2.5 Analyse KPI’s like Revenue, number of orders, average order value, number of customers (existing/new), 
 # quantity, by category, by month, by week, by day etc…
@@ -102,4 +103,50 @@ for (date_month in date_list) {
 }
 
 print("Customer retention analysis for 12 months completed.")
+
+# ------2.3 Revenues from new/existing customers on month on month basis-------
+# 3 columns: month (year), revenues from new customers, revenues from existing customers
+# The key is to identify new and existing customers for each month
+# Compare current date and firsttime_month to decide new or existing
+load(file = "D:/Coding Projects/Customer Lifetime Value Analysis/transformed datasets/View_OnlineSales_Invoice_Transaction_Detail.RData")
+print("OnlineSales Invoice Detail loaded.")
+
+View_Revenue_Transaction <- left_join(View_OnlineSales_Invoice_Transaction_Detail, View_CustomerFirstTime, by= "CustomerID")
+View(View_Revenue_Transaction)
+
+# only keep relevant columns:
+View_Revenue_Transaction_Simple <- View_Revenue_Transaction[,c("Transaction_ID", "CustomerID", 
+                                                               "Transaction_Date", "Month",
+                                                               "Invoice", "First_Transaction_Month")]
+colnames(View_Revenue_Transaction_Simple)[colnames(View_Revenue_Transaction_Simple) == "Month"] <- "Current_Transaction_Month"
+View_Revenue_Transaction_Simple$Current_Transaction_Month <- format(View_Revenue_Transaction_Simple$Transaction_Date, "%Y-%m")
+
+# Create new column: new customer label
+View_Revenue_Transaction_Simple$New_Customer_Label <- ifelse(View_Revenue_Transaction_Simple$Current_Transaction_Month == 
+                                                               View_Revenue_Transaction_Simple$First_Transaction_Month,
+                                                             "new", "existing")
+
+View_Revenue_Transaction_Simple <- View_Revenue_Transaction_Simple[, c("Current_Transaction_Month",
+                                                                       "Invoice",
+                                                                       "New_Customer_Label")]
+# View(View_Revenue_Transaction_Simple)
+
+# aggregate invoice value by transaction_month and customer label
+View_Revenue_Transaction_Result <- aggregate(Invoice ~ Current_Transaction_Month + New_Customer_Label, 
+                                              data = View_Revenue_Transaction_Simple, 
+                                              FUN = sum)
+View_Revenue_Transaction_Result <- View_Revenue_Transaction_Result[order(View_Revenue_Transaction_Result$Current_Transaction_Month), ]
+View(View_Revenue_Transaction_Result)
+
+
+
+
+
+
+
+
+
+
+
+
 

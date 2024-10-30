@@ -30,9 +30,17 @@ View_OnlineSales_GST$Month <- format(View_OnlineSales_GST$Transaction_Date, "%b"
 
 # Need to create a new dummy variable (0, 1) from Coupon_Status
 View_OnlineSales_GST$Coupon_Status_Bi <-  ifelse(View_OnlineSales_GST$Coupon_Status == "Used", 1, 0)
+View(View_OnlineSales_GST)
 
 # Left join
 View_OnlineSales_GST_Coupon <- left_join(View_OnlineSales_GST, table_Discount, by= c("Month", "Product_Category"))
+# View(View_OnlineSales_GST_Coupon)
+# summary(View_OnlineSales_GST_Coupon)
+# View(table_Discount)
+
+# set discount percentage to 0, instead of NA
+View_OnlineSales_GST_Coupon$Discount_pct[is.na(View_OnlineSales_GST_Coupon$Discount_pct)] <- 0
+
 # View(View_OnlineSales_GST_Coupon)
 
 summary(View_OnlineSales_GST_Coupon)
@@ -49,6 +57,11 @@ View_OnlineSales_GST_Coupon$Invoice <- (
                                        )
 
 View_OnlineSales_GST_Coupon$Invoice <- round(View_OnlineSales_GST_Coupon$Invoice, 2)
+
+# check if there is any N/A
+summary(View_OnlineSales_GST_Coupon)
+
+View_OnlineSales_Invoice_Transaction_Detail <- View_OnlineSales_GST_Coupon
 
 View_OnlineSales_Invoice_Transaction <- View_OnlineSales_GST_Coupon[, c("Transaction_ID", "Invoice")]
 View_OnlineSales_Invoice_Transaction <- View_OnlineSales_Invoice_Transaction[order(View_OnlineSales_Invoice_Transaction$Invoice, 
@@ -68,3 +81,10 @@ View_OnlineSales_Invoice_SKU <- View_OnlineSales_Invoice_SKU[order(View_OnlineSa
 View(View_OnlineSales_Invoice_SKU)
 
 print("Invoice Calculation completed.")
+
+
+# save final views: 
+save(View_OnlineSales_Invoice_Transaction_Detail,
+     file="D:/Coding Projects/Customer Lifetime Value Analysis/transformed datasets/View_OnlineSales_Invoice_Transaction_Detail.RData")
+
+print("Transaction-level invoice detail saved.")
