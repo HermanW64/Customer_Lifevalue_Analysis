@@ -3,9 +3,12 @@
 # 2.2 Understand the retention of customers on month on month basis (x)
 
 # 2.3 How the revenues from existing/new customers on month on month basis (X)
+
+
 # 2.4 How the discounts playing role in the revenues?
 # 2.5 Analyse KPI’s like Revenue, number of orders, average order value, number of customers (existing/new), 
-# quantity, by category, by month, by week, by day etc…
+# quantity, by category, by month, by week, by day etc… (Use Dashboard, please)
+
 # 2.6 Understand the trends/seasonality of sales by category, location, month etc…
 # 2.7 How number order varies and sales with different days?
 # 2.8 Calculate the Revenue, Marketing spend, percentage of marketing spend out of revenue, Tax, percentage of delivery charges by month.
