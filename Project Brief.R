@@ -6,21 +6,31 @@
 # 1.1 Invoice Value =((Quantity * Avg_price)(1 - Discount_pct)*(1+GST))+Delivery_Charges (X, PowerBI)
 
 # 2.Perform Detailed exploratory analysis 
-# 2.1 Understanding how many customers acquired every month
-# 2.2 Understand the retention of customers on month on month basis
-# 2.3 How the revenues from existing/new customers on month on month basis
-# 2.4 How the discounts playing role in the revenues?
+# 2.1 Understanding how many customers acquired every month (X, PowerBI)
+# 2.2 Understand the retention of customers on month on month basis (X, PowerBI)
+# 2.3 How the revenues from existing/new customers on month on month basis (X, PowerBI)
+
+# 2.4 How the discounts playing role in the revenues? (PowerBI)
+
 # 2.5 Analyse KPI’s like Revenue, number of orders, average order value, number of customers (existing/new), 
-# quantity, by category, by month, by week, by day etc…
-# 2.6 Understand the trends/seasonality of sales by category, location, month etc…
-# 2.7 How number order varies and sales with different days?
-# 2.8 Calculate the Revenue, Marketing spend, percentage of marketing spend out of revenue, Tax, percentage of delivery charges by month.
-# 2.9 How marketing spend is impacting on revenue?
-# 2.10 Which product was appeared in the transactions?
-# 2.11 Which product was purchased mostly based on the quantity?
+# quantity, by category, by month, by week, by day etc… (PowerBI)
+
+# 2.6 Understand the trends/seasonality of sales by category, user gender, user location, month etc… (PowerBI)
+# 2.7 How number of order varies and sales with different days? (PowerBI)
+
+# 2.8 Calculate the Revenue, Marketing spend, percentage of marketing spend out of revenue, Tax, 
+# percentage of delivery charges by month. (PowerBI)
+
+# 2.9 How marketing spend is impacting on revenue? (PowerBI)
+# 2.10 Which product was appeared mostly in the transactions? (PowerBI)
+# 2.11 Which product was purchased mostly based on the quantity? (PowerBI)
+# - dimension: month, category, user location/gender
 
 # 3.Performing Customer Segmentation
-# 3.1 Heuristic (Value based, RFM) – Divide the customers into Premium, Gold, Silver,Standard customers and define strategy on the same.
+# 3.1 Heuristic (Value based, RFM) (PowerBI)
+# – Divide the customers into Premium, Gold, Silver, Standard customers and define strategy on the same.
+# - set today as: Jan 1, 2020, period as Jan 1, 2019 - Dec 31, 2019
+
 # 3.2 Scientific (Using K-Means) & Understand the profiles. Define strategy for each segment.
 
 # 4.Predicting Customer Lifetime Value (Low Value/Medium Value/High Value)
