@@ -1,0 +1,89 @@
+Business Objective
+
+#I. Understand the business process
+The project is a typical e-commerce situation, where customers buy products from the company.
+In order to maximize the profit and better serve our customers, the company needs a comprehensive analysis of the historical transaction data.
+
+# II. The following tasks are required:
+## 1.Calculate Invoice amount or sale_amount or revenue for each transaction and item level 
+
+  You need a new column named "Invoice Value" to store the calculation result. The calculation formula is:
+    Invoice Value =((Quantity * Avg_price)(1 - Discount_pct)*(1+GST))+Delivery_Charges 
+
+  The calculation involves details of transactions, so naturally we need to work on the table: Online_Sales. The general thoughts 
+  will be shared instead of detailed manipulations. If you want more details, don't hesitate to reach out to me. Some key points:
+    (1) Make sure all fields are in decimal or integer format. 
+    (2) For discount percentage, you need to perform join operation with table Discount_Coupon. Notice that we need both "month" and "product" to find the coupon name and percentage value. 
+    (3) Sometimes there is no discount, make sure to set the discount value to 0. (If you leave it to null, it will result in null value in your final result.)
+
+## 2.Perform Detailed exploratory analysis 
+### 2.1 Understanding how many customers acquired every month
+  
+  Your result should be a table with 2 columns: "Month (Year)", "Number of new customers". The month column should be sorted in ascending order.
+
+  Specifically, you need to distinguish new and old customers for each month. If someone's earliest transaction is in january 2019, then he or she 
+  is the new customer of January 2019, regardless of whether there are other transactions in other months after January 2019. In another word,
+  if you can keep the customer IDs with their earliest month, you are almost there. Naturally we need to work on table: Online_Sales because 
+  we need customer ID and all their transaction dates. Don't overthink it, the following simple steps can work out.
+    (1) Only keep customer ID and transaction date.
+    (2) Derive month information from transaction date. The new column should look like "Jan-01 2019" but in date format. (Personally I recommend to use 
+      "Jan-01, 2019" to represent "Jan 2019") I did so because later we need to sort the date information in dashboard slicers.
+    (3) Make sure the 3 columns are sorted in ascending order, by the new column (month).
+    (4) Remove duplicates of customerID. This step returns the earliest transaction month for each customer. 
+    (5) Group the result of step 4: count the customer ID, group by month 
+
+### 2.2 Understand the retention of customers on month on month basis (X, PowerBI)
+
+  The result will be a little bit more complicated than previous one. That is because we need to track customers' retention for each month.
+  My idea is to fix one month each time, and see how many of the new customers continue shopping for the next few months. For example, given 
+  the number of new customers of January 2019, we need to calculate how many of them continue shopping in the next few months: Feb, Mar, ...
+
+  To do this, we need result from 2.1
+    (1) In table Online_Sales, we keep customer ID and transaction date. Besides, we have to perform join operation with result of 2.1.
+    The reason is we have to add "earliest transaction month" for each customer ID.
+    (2) We derive a new column named "current transaction month" from transaction date. It should share the same format with "earliest transaction month".
+    (3) Make sure columns are sorted in ascending order, by the column "current transaction month".
+    (4) Remove duplicates of customer ID & "current transaction month". We only need to know if the customer has any transaction during the month.
+    (5) In PowerBi dashboard, we use "earliest transaction month" as slicer, then calculate count the number of "customer ID" for each month.
+    That will be the result we need.
+
+  If you need a simpler result to just show number of total customers and old customers for each month, you can add a new column named "new customer tag"
+  after step (4). The tag value is 1 if "current transaction month" is equal to "earliest transaction month", otherwise it is 0. When delivering the result, 
+  you simply count the number of 0 as the number of old customers in each month. 
+
+### 2.3 How the revenues from existing/new customers on month on month basis (X, PowerBI)
+
+  The expected result should have at least 3 columns:month, new customer revenue, existing customer revenue. 
+  
+  You can calculate monthly revenue from both groups by using a tag for each customer ("new" or "existing"). You may have already did that
+  in 2.2. In PowerBI dashboard table, you can put "tag" in columns, and then calculate the sum of invoice value for each customer group in each month.
+  Additionally, you can add a line chart to show the change of revenues for each customer group (in percentage).
+
+# 2.4 How the discounts playing role in the revenues? (PowerBI)
+
+  Obvisouly, we need to find the relationship between discounts and revenues. When it comes to discount, we have discount percentage and 
+  the product category. So, we can showcase the usage of discounts: how many coupons are used, the percentage of all released coupons. 
+  To show the number of different categories of discounts, we can use a pie chart here.
+  
+  Besides, we can take order invoice value into consideration. Does higher discount result in higher average order value in different product categories?
+  Since we hope to present relationship between "product category", "discount category", and "invoice value", we can created clusterd bar charts.
+
+# 2.5 Analyse KPI’s like Revenue, number of orders, average order value, number of customers (existing/new), quantity, by category, by month, by week, by day etc… (PowerBI)
+
+  This KPI dashboard requires no complex calculation. Take product category as slicer, then showcase the changes of revenues, orders, ...
+  In 2.7 we will drill down to each day, so now we only drill down to month.
+
+# 2.6 Understand the trends/seasonality of sales by category, user gender, user location, month etc… (PowerBI)
+
+
+
+
+# 2.7 How number of order varies and sales with different days? (PowerBI)
+
+# 2.8 Calculate the Revenue, Marketing spend, percentage of marketing spend out of revenue, Tax, 
+# percentage of delivery charges by month. (PowerBI)
+
+# 2.9 How marketing spend is impacting on revenue? (PowerBI)
+# 2.10 Which product was appeared mostly in the transactions? (PowerBI)
+# 2.11 Which product was purchased mostly based on the quantity? (PowerBI)
+# - dimension: month, category, user location/gender
