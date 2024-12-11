@@ -59,7 +59,7 @@ In order to maximize the profit and better serve our customers, the company need
   in 2.2. In PowerBI dashboard table, you can put "tag" in columns, and then calculate the sum of invoice value for each customer group in each month.
   Additionally, you can add a line chart to show the change of revenues for each customer group (in percentage).
 
-# 2.4 How the discounts playing role in the revenues? (PowerBI)
+### 2.4 How the discounts playing role in the revenues? (PowerBI)
 
   Obvisouly, we need to find the relationship between discounts and revenues. When it comes to discount, we have discount percentage and 
   the product category. So, we can showcase the usage of discounts: how many coupons are used, the percentage of all released coupons. 
@@ -68,22 +68,44 @@ In order to maximize the profit and better serve our customers, the company need
   Besides, we can take order invoice value into consideration. Does higher discount result in higher average order value in different product categories?
   Since we hope to present relationship between "product category", "discount category", and "invoice value", we can created clusterd bar charts.
 
-# 2.5 Analyse KPI’s like Revenue, number of orders, average order value, number of customers (existing/new), quantity, by category, by month, by week, by day etc… (PowerBI)
+### 2.5 Analyse KPI’s like Revenue, number of orders, average order value, number of customers (existing/new), quantity, by category, by month, by week, by day etc… (PowerBI)
 
   This KPI dashboard requires no complex calculation. Take product category as slicer, then showcase the changes of revenues, orders, ...
   In 2.7 we will drill down to each day, so now we only drill down to month.
 
-# 2.6 Understand the trends/seasonality of sales by category, user gender, user location, month etc… (PowerBI)
+### 2.6 Understand the trends/seasonality of sales by category, user gender, user location, month etc…
 
+  Following the same pattern in 2.5, we use product category, user gender, location, and month as slicers to track the change of 
+  sale revenues, the number of orders, and average order value. Line charts are good for this task.
 
+### 2.7 How number of order varies and sales with different days? 
 
+  We need to track number of orders and sales by different days in each month. Again we use line charts, and we use product- and user-related
+  fields as slicers to drill down. 
 
-# 2.7 How number of order varies and sales with different days? (PowerBI)
+### 2.8 Calculate the Revenue, Marketing spend, percentage of marketing spend out of revenue, Tax, percentage of delivery charges by month. (PowerBI)
 
-# 2.8 Calculate the Revenue, Marketing spend, percentage of marketing spend out of revenue, Tax, 
-# percentage of delivery charges by month. (PowerBI)
+  This task aims to show the revenue and total cost. Total cost is the sum of marketing spend, tax, and delivery charges. We need to track 
+  the relationship between revenue and total cost as time goes by, so the line chart is a good choice: we not only show the absolute value, but also 
+  present the percentage of total cost out of revenue for each month.
 
-# 2.9 How marketing spend is impacting on revenue? (PowerBI)
-# 2.10 Which product was appeared mostly in the transactions? (PowerBI)
-# 2.11 Which product was purchased mostly based on the quantity? (PowerBI)
-# - dimension: month, category, user location/gender
+### 2.9 How marketing spend is impacting on revenue? 
+
+  The task essentially requires us to reveal the relationship between marketing spend and sales revenues. Because both variables are 
+  numeric, we can use a scatter plot to show the relationship.
+
+### 2.10 Which product was appeared mostly in the transactions? 
+
+  The product appearing mostly can be found by counting the SKU. To find the popular item, we can't just count the SKU and return one single result.
+  Instead, I recommend to add more dimensions to the task:
+  (1) In each product category, which is the msot popular item?
+  (2) In each customer location or gender, which is the most popular item?
+  (3) In each month, which is the most popular item? 
+
+  The top product has the highest quantity. 
+
+### 2.11 Which product was purchased mostly based on the quantity? (by dimension: month, category, user location/gender)
+
+  Together with 2.10, we created slicers for month, product category, user location and user gender. Then we count the number of 
+  product SKU (not the quantity in the order). Remember that each order contains only one SKU, but its item quantity can be higher than 1.
+  Again, we use clustered bar chart to show the top 3 popular items in each month.
