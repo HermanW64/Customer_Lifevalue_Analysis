@@ -1,4 +1,9 @@
-Business Objective
+Project Name: E-Commerce Transaction Analysis
+Project Purpose: to demonstrate the PowerBI skills and analytical skills in structured datasets and businesssituations.
+Project Keywords: PowerBI, data transformation, data cleaning, table join, problem-solving, dashboard design, data visualization
+Project Source: https://www.kaggle.com/datasets/rishikumarrajvansh/marketing-insights-for-e-commerce-company
+PowerBI Dashboard link: https://app.powerbi.com/groups/me/reports/9d5c5385-18e3-4c0e-b12c-a2622fa8d339?ctid=c1e131c8-7164-4dcd-b68c-fbd599c579b4&pbi_source=linkShare
+
 
 #I. Understand the business process
 The project is a typical e-commerce situation, where customers buy products from the company.
@@ -32,6 +37,8 @@ In order to maximize the profit and better serve our customers, the company need
     (4) Remove duplicates of customerID. This step returns the earliest transaction month for each customer. 
     (5) Group the result of step 4: count the customer ID, group by month 
 
+  Insights to get:
+
 ### 2.2 Understand the retention of customers on month on month basis (X, PowerBI)
 
   The result will be a little bit more complicated than previous one. That is because we need to track customers' retention for each month.
@@ -51,6 +58,8 @@ In order to maximize the profit and better serve our customers, the company need
   after step (4). The tag value is 1 if "current transaction month" is equal to "earliest transaction month", otherwise it is 0. When delivering the result, 
   you simply count the number of 0 as the number of old customers in each month. 
 
+  Insights to get:
+
 ### 2.3 How the revenues from existing/new customers on month on month basis (X, PowerBI)
 
   The expected result should have at least 3 columns:month, new customer revenue, existing customer revenue. 
@@ -58,6 +67,8 @@ In order to maximize the profit and better serve our customers, the company need
   You can calculate monthly revenue from both groups by using a tag for each customer ("new" or "existing"). You may have already did that
   in 2.2. In PowerBI dashboard table, you can put "tag" in columns, and then calculate the sum of invoice value for each customer group in each month.
   Additionally, you can add a line chart to show the change of revenues for each customer group (in percentage).
+
+  Insights to get:
 
 ### 2.4 How the discounts playing role in the revenues? (PowerBI)
 
@@ -68,20 +79,28 @@ In order to maximize the profit and better serve our customers, the company need
   Besides, we can take order invoice value into consideration. Does higher discount result in higher average order value in different product categories?
   Since we hope to present relationship between "product category", "discount category", and "invoice value", we can created clusterd bar charts.
 
+  Insights to get:
+
 ### 2.5 Analyse KPI’s like Revenue, number of orders, average order value, number of customers (existing/new), quantity, by category, by month, by week, by day etc… (PowerBI)
 
   This KPI dashboard requires no complex calculation. Take product category as slicer, then showcase the changes of revenues, orders, ...
   In 2.7 we will drill down to each day, so now we only drill down to month.
 
-### 2.6 Understand the trends/seasonality of sales by category, user gender, user location, month etc…
+  Insights to get:
+
+### 2.6 Understand the trends/seasonality of sales by category, user gender, user location, month etc...
 
   Following the same pattern in 2.5, we use product category, user gender, location, and month as slicers to track the change of 
   sale revenues, the number of orders, and average order value. Line charts are good for this task.
+
+  Insights to get:
 
 ### 2.7 How number of order varies and sales with different days? 
 
   We need to track number of orders and sales by different days in each month. Again we use line charts, and we use product- and user-related
   fields as slicers to drill down. 
+
+  Insights to get:
 
 ### 2.8 Calculate the Revenue, Marketing spend, percentage of marketing spend out of revenue, Tax, percentage of delivery charges by month. (PowerBI)
 
@@ -89,10 +108,14 @@ In order to maximize the profit and better serve our customers, the company need
   the relationship between revenue and total cost as time goes by, so the line chart is a good choice: we not only show the absolute value, but also 
   present the percentage of total cost out of revenue for each month.
 
+  Insights to get:
+
 ### 2.9 How marketing spend is impacting on revenue? 
 
   The task essentially requires us to reveal the relationship between marketing spend and sales revenues. Because both variables are 
   numeric, we can use a scatter plot to show the relationship.
+
+  Insights to get:
 
 ### 2.10 Which product was appeared mostly in the transactions? 
 
@@ -103,9 +126,14 @@ In order to maximize the profit and better serve our customers, the company need
   (3) In each month, which is the most popular item? 
 
   The top product has the highest quantity. 
+  
+  Insights to get:
+
 
 ### 2.11 Which product was purchased mostly based on the quantity? (by dimension: month, category, user location/gender)
 
   Together with 2.10, we created slicers for month, product category, user location and user gender. Then we count the number of 
   product SKU (not the quantity in the order). Remember that each order contains only one SKU, but its item quantity can be higher than 1.
   Again, we use clustered bar chart to show the top 3 popular items in each month.
+
+  Insights to get:
